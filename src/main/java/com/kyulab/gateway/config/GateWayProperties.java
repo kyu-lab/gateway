@@ -9,13 +9,13 @@ import java.util.List;
 @ConfigurationProperties(prefix = "spring.cloud.gateway")
 public class GateWayProperties {
 
-	private List<RouteOption> routes;
+	private List<RouteConfig> routes;
 
-	public List<RouteOption> getRoutes() {
+	public List<RouteConfig> getRoutes() {
 		return routes;
 	}
 
-	public void setRoutes(List<RouteOption> routes) {
+	public void setRoutes(List<RouteConfig> routes) {
 		this.routes = routes;
 	}
 

@@ -1,5 +1,7 @@
 package com.kyulab.gateway.config;
 
+import com.kyulab.gateway.filter.BoardFilter;
+import com.kyulab.gateway.filter.UserFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -12,12 +14,20 @@ public class GateWayConfig {
 
 	// 추후 yml을 이용한 명시
 	private final GateWayProperties gateWayProperties;
+	private final UserFilter userFilter;
+	private final BoardFilter boardFilter;
 
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-				.route("user-service", r -> r.path("/api/user/**").uri("http://localhost:8001"))
-				.route("board-service", r -> r.path("/api/board/**").uri("http://localhost:8002"))
+				.route("user-service", r -> r.path("/user/**")
+						.filters(f -> f.filter(userFilter))
+						.uri("http://localhost:8001")
+				)
+				.route("board-service", r -> r.path("/board/**")
+						.filters(f -> f.filter(boardFilter))
+						.uri("http://localhost:8002")
+				)
 				.build();
 	}
 

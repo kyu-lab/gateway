@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RouteOption {
+public class RouteConfig {
 
 	private String id;
 	private String uri;
