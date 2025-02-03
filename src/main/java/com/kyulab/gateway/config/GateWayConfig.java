@@ -20,11 +20,16 @@ public class GateWayConfig {
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-				.route("user-service", r -> r.path("/user/**")
+				.route("user-service", r -> r.path("/api/user/**")
 						.filters(f -> f.filter(userFilter))
 						.uri("http://localhost:8001")
 				)
-				.route("board-service", r -> r.path("/board/**")
+				.route("board-service",
+						r -> r.path(
+							"/api/board/**",
+							"/api/post/**",
+							"/api/comment/**"
+						)
 						.filters(f -> f.filter(boardFilter))
 						.uri("http://localhost:8002")
 				)

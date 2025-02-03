@@ -7,6 +7,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+import java.util.List;
+
 @Configuration
 public class WebConfig {
 
@@ -14,8 +16,8 @@ public class WebConfig {
 	public CorsWebFilter corsWebFilter() {
 		// CORS 설정을 위한 CorsConfiguration 객체 생성
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
-		corsConfiguration.addAllowedOrigin("http://localhost:3000"); // 프론트
-		corsConfiguration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
+		corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "https://localhost:3000"));
+		corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		corsConfiguration.addAllowedHeader("*"); // 모든 헤더 허용
 		corsConfiguration.setAllowCredentials(true); // 자격 증명 허용
 
